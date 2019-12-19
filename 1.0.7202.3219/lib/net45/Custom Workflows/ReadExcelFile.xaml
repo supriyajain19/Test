@@ -1,0 +1,322 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:moie="clr-namespace:Microsoft.Office.Interop.Excel;assembly=Microsoft.Office.Interop.Excel" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Year" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_StartDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_EndDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_FiscalYear" Type="InArgument(x:String)" />
+    <x:Property Name="in_SmtpHost" Type="InArgument(x:String)" />
+    <x:Property Name="in_SmtpPort" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_UserName" Type="InArgument(x:String)" />
+    <x:Property Name="in_Password" Type="InArgument(x:String)" />
+    <x:Property Name="in_BAS" Type="InArgument(x:String)" />
+    <x:Property Name="in_SupportBAS" Type="InArgument(x:String)" />
+    <x:Property Name="in_UserEmail" Type="InArgument(x:String)" />
+    <x:Property Name="in_GroupEmail" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>897.6,3532</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Office.Interop.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Read excel file to create shhet and pivot." DisplayName="ReadExcelFIleSequnce" sap:VirtualizedContainerService.HintSize="877.6,3472" sap2010:WorkflowViewState.IdRef="Sequence_23">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="ReadExcelFile" sap:VirtualizedContainerService.HintSize="836,3351.2" sap2010:WorkflowViewState.IdRef="Sequence_30">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="var_filePath" />
+        <Variable x:TypeArguments="x:String" Name="var_workbookPath" />
+        <Variable x:TypeArguments="x:Boolean" Name="var_sourceSum" />
+        <Variable x:TypeArguments="x:String" Name="var_emailBody" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="Condition for each quarter" sap:VirtualizedContainerService.HintSize="794.4,1123.2" sap2010:WorkflowViewState.IdRef="Sequence_36">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <If Condition="[Now.Month.Equals(04)]" DisplayName="If for Q1 : Month 04" sap:VirtualizedContainerService.HintSize="681.6,402.4" sap2010:WorkflowViewState.IdRef="If_25">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="QuarterQ1 Assign Operations" sap:VirtualizedContainerService.HintSize="304,252.8" sap2010:WorkflowViewState.IdRef="Sequence_32">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Assign : var_filePat Q1 #01" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_43">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[var_filePath]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Config("FilePath").ToString+"\"+in_Year+"\"+in_Config("FileAPAuditTrailQ1").ToString+in_FiscalYear+"_"+in_StartDate+"-"+in_EndDate]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign : var_workbookPath Q1" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_44">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[var_workbookPath]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Config("FilePath").ToString+"\"+in_Year+"\"+in_Config("VATWOrkBookQ1").ToString+in_FiscalYear+"_"+in_StartDate+"-"+in_EndDate]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <ui:Comment sap:VirtualizedContainerService.HintSize="333.6,56" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Month Not 04 Read Excel File WOrkflow" />
+          </If.Else>
+        </If>
+        <If Condition="[Now.Month.Equals(07)]" DisplayName="If for Q2 : Month07" sap:VirtualizedContainerService.HintSize="681.6,402.4" sap2010:WorkflowViewState.IdRef="If_26">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Quarter Q2 Assign Operations" sap:VirtualizedContainerService.HintSize="304,252.8" sap2010:WorkflowViewState.IdRef="Sequence_33">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Assign : var_filePat Q2" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_45">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[var_filePath]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Config("FilePath").ToString+"\"+in_Year+"\"+in_Config("FileAPAuditTrailQ2").ToString+in_FiscalYear+"_"+in_StartDate+"-"+in_EndDate]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign : var_workbookPath Q2" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_46">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[var_workbookPath]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Config("FilePath").ToString+"\"+in_Year+"\"+in_Config("VATWOrkBookQ2").ToString+in_FiscalYear+"_"+in_StartDate+"-"+in_EndDate]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <ui:Comment sap:VirtualizedContainerService.HintSize="333.6,56" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Month Not 04 Read Excel File WOrkflow" />
+          </If.Else>
+        </If>
+        <If Condition="[Now.Month.Equals(10)]" DisplayName="If for Q3" sap:VirtualizedContainerService.HintSize="681.6,52.8" sap2010:WorkflowViewState.IdRef="If_27">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Quarter Q3 Assign Operations" sap:VirtualizedContainerService.HintSize="304,252.8" sap2010:WorkflowViewState.IdRef="Sequence_34">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Assign : var_filePat Q3 #03" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_47">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[var_filePath]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Config("FilePath").ToString+"\"+in_Year+"\"+in_Config("FileAPAuditTrailQ3").ToString+in_FiscalYear+"_"+in_StartDate+"-"+in_EndDate]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign : var_workbookPath Q3" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_48">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[var_workbookPath]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Config("FilePath").ToString+"\"+in_Year+"\"+"VAT_IT_Workbook_FVAT_Q3_FY"+in_FiscalYear+"_"+in_StartDate+"-"+in_EndDate]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <ui:Comment sap:VirtualizedContainerService.HintSize="333.6,56" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Month Not 10 Read Excel File WOrkflow" />
+          </If.Else>
+        </If>
+        <If Condition="[Now.Month.Equals(01)]" DisplayName="If Q4" sap:VirtualizedContainerService.HintSize="681.6,52.8" sap2010:WorkflowViewState.IdRef="If_28">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Quarter Q4 Assign Operations" sap:VirtualizedContainerService.HintSize="304,252.8" sap2010:WorkflowViewState.IdRef="Sequence_35">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Assign : var_filePat Q4" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_49">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[var_filePath]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Config("FilePath").ToString+"\"+in_Year+"\"+in_Config("FileAPAuditTrailQ4").ToString+in_FiscalYear+"_"+in_StartDate+"-"+in_EndDate]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign : var_workbookPath Q4" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_50">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[var_workbookPath]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Config("FilePath").ToString+"\"+in_Year+"\"+in_Config("VATWOrkBookQ4").ToString+in_FiscalYear+"_"+in_StartDate+"-"+in_EndDate]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <ui:Comment sap:VirtualizedContainerService.HintSize="333.6,56" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Month Not 01Read Excel File WOrkflow" />
+          </If.Else>
+        </If>
+      </Sequence>
+      <ui:LogMessage DisplayName="Log Message : Creation of Sheets Start#32" sap:VirtualizedContainerService.HintSize="794.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_30" Level="Info" Message="Creation of Sheets Start" />
+      <ui:InvokeCode ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Create Sheets for each country andcalculate the sum for all sheets and compare with source sum." Code="Dim wb1 As Microsoft.Office.Interop.Excel.Workbook&#xD;&#xA;Dim wb2 As Microsoft.Office.Interop.Excel.Workbook&#xD;&#xA;Dim ws As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws1 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws2 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws3 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws4 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws5 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws6 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws7 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws8 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws9 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim Total As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim p_ws As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim rng As Microsoft.Office.Interop.Excel.Range &#xD;&#xA;Dim p_rng As Microsoft.Office.Interop.Excel.Range&#xD;&#xA;Dim lastRow As Integer&#xD;&#xA;Try&#xD;&#xA; excel = New Microsoft.Office.Interop.Excel.ApplicationClass'create the instance of excel work book'&#xD;&#xA;wb1=excel.Workbooks.Open(in_Filepath+&quot;.XLSX&quot;)'opem excel file&#xD;&#xA;&#xD;&#xA;excel.Visible=True&#xD;&#xA;excel.DisplayAlerts = False&#xD;&#xA;&#xD;&#xA;ws=CType(wb1.Sheets(&quot;Sheet1&quot;),Microsoft.Office.Interop.Excel.Worksheet)'select a sheet and activiates'&#xD;&#xA;ws.Activate&#xD;&#xA;lastRow = ws.UsedRange.Rows.Count&#xD;&#xA;'AU&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8,&quot;AU&quot;,Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlFilterValues)&#xD;&#xA;ws.Range(&quot;A1:AJ&quot;+lastRow.ToString).Copy&#xD;&#xA;console.WriteLine(&quot;error&quot;)&#xD;&#xA;ws1=CType(wb1.Sheets.Add(ws),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;ws1.Name=&quot;AU&quot;&#xD;&#xA;console.WriteLine(&quot;created&quot;)&#xD;&#xA;ws1.Activate&#xD;&#xA;ws1.Range(&quot;A1&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8)&#xD;&#xA;&#xD;&#xA;'CA&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8,&quot;CA&quot;,Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlFilterValues)&#xD;&#xA;ws.Range(&quot;A1:AJ&quot;+lastRow.ToString).Copy&#xD;&#xA;ws2=CType(wb1.Sheets.Add(ws),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;ws2.Name=&quot;CA&quot;&#xD;&#xA;console.WriteLine(&quot;created&quot;)&#xD;&#xA;ws2.Activate&#xD;&#xA;ws2.Range(&quot;A1&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;'ES&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8,&quot;ES&quot;,Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlFilterValues)&#xD;&#xA;ws.Range(&quot;A1:AJ&quot;+lastRow.ToString).Copy&#xD;&#xA;ws3=CType(wb1.Sheets.Add(ws),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;ws3.Name=&quot;ES&quot;&#xD;&#xA;console.WriteLine(&quot;created&quot;)&#xD;&#xA;ws3.Activate&#xD;&#xA;ws3.Range(&quot;A1&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8)&#xD;&#xA;&#xD;&#xA;'IE&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8,&quot;IE&quot;,Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlFilterValues)&#xD;&#xA;ws.Range(&quot;A1:AJ&quot;+lastRow.ToString).Copy&#xD;&#xA;ws4=CType(wb1.Sheets.Add(ws),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;ws4.Name=&quot;IE&quot;&#xD;&#xA;console.WriteLine(&quot;created&quot;)&#xD;&#xA;ws4.Activate&#xD;&#xA;ws4.Range(&quot;A1&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;'ZA&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8,&quot;ZA&quot;,Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlFilterValues)&#xD;&#xA;ws.Range(&quot;A1:AJ&quot;+lastRow.ToString).Copy&#xD;&#xA;ws5=CType(wb1.Sheets.Add(ws),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;ws5.Name=&quot;ZA&quot;&#xD;&#xA;console.WriteLine(&quot;created&quot;)&#xD;&#xA;ws5.Activate&#xD;&#xA;ws5.Range(&quot;A1&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8)&#xD;&#xA;&#xD;&#xA;'EU&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8,{&quot;AT&quot;,&quot;BE&quot;,&quot;BG&quot;,&quot;CY&quot;,&quot;CZ&quot;,&quot;DK&quot;,&quot;DE&quot;,&quot;EE&quot;,&quot;FI&quot;,&quot;FR&quot;,&quot;GR&quot;,&quot;HR&quot;,&quot;HU&quot;,&quot;IT&quot;,&quot;LV&quot;,&quot;LT&quot;,&quot;LU&quot;,&quot;MT&quot;,&quot;NL&quot;,&quot;PL&quot;,&quot;PT&quot;,&quot;RO&quot;,&quot;SE&quot;,&quot;SI&quot;,&quot;SK&quot;,&quot;UK&quot;,&quot;GB&quot;},Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlFilterValues)&#xD;&#xA;ws.Range(&quot;A1:AJ&quot;+lastRow.ToString).Copy&#xD;&#xA;ws6=CType(wb1.Sheets.Add(ws),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;ws6.Name=&quot;EU&quot;&#xD;&#xA;console.WriteLine(&quot;created&quot;)&#xD;&#xA;ws6.Activate&#xD;&#xA;ws6.Range(&quot;A1&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8)&#xD;&#xA;&#xD;&#xA;'NON-EU&#xD;&#xA;console.WriteLine(&quot;NON-EU start&quot;)&#xD;&#xA;ws.Range(&quot;A1:AJ&quot;+lastRow.ToString).Copy&#xD;&#xA;ws7=CType(wb1.Sheets.Add(ws),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;ws7.Name=&quot;NON-EU&quot;&#xD;&#xA;ws7.Activate&#xD;&#xA;ws7.Range(&quot;A1&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws7.Range(&quot;A1&quot;).AutoFilter(8,{&quot;AT&quot;,&quot;BE&quot;,&quot;BG&quot;,&quot;CY&quot;,&quot;CZ&quot;,&quot;DK&quot;,&quot;DE&quot;,&quot;EE&quot;,&quot;FI&quot;,&quot;FR&quot;,&quot;GR&quot;,&quot;HR&quot;,&quot;HU&quot;,&quot;IT&quot;,&quot;LV&quot;,&quot;LT&quot;,&quot;LU&quot;,&quot;MT&quot;,&quot;NL&quot;,&quot;PL&quot;,&quot;PT&quot;,&quot;RO&quot;,&quot;SE&quot;,&quot;SI&quot;,&quot;SK&quot;,&quot;UK&quot;,&quot;GB&quot;,&quot;AU&quot;,&quot;IE&quot;,&quot;CA&quot;,&quot;ZA&quot;,&quot;ES&quot;},Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlFilterValues)&#xD;&#xA;'System.Windows.MessageBox.Show(ws7.UsedRange.ToString)&#xD;&#xA;ws7.Range(&quot;A2:AJ2&quot;+lastRow.ToString).ClearContents&#xD;&#xA;ws7.Range(&quot;A1&quot;).AutoFilter(8)&#xD;&#xA;ws7.UsedRange.SpecialCells(Type:=Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeBlanks).Delete'delete blank row&#xD;&#xA;console.WriteLine(&quot;created&quot;)&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(8)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;'create new workbook for ap auit trail vat it workbook&#xD;&#xA;&#xD;&#xA;wb2=excel.Application.Workbooks.Add()&#xD;&#xA;wb2.Activate&#xD;&#xA;console.WriteLine(&quot;created workbook&quot;)&#xD;&#xA;ws8=CType(wb2.Sheets(&quot;Sheet1&quot;),Microsoft.Office.Interop.Excel.Worksheet)'select a sheet and activiates'&#xD;&#xA;ws8.Activate&#xD;&#xA;console.WriteLine(&quot;created sheet&quot;)&#xD;&#xA;lastRow = ws.UsedRange.Rows.Count&#xD;&#xA;ws6.Range(&quot;A1:AJ&quot;+lastRow.ToString).Copy&#xD;&#xA;ws8.Range(&quot;A1&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;console.WriteLine(in_Filepath)&#xD;&#xA;Dim rowCount As Integer  = ws.UsedRange.Rows.Count &#xD;&#xA;Dim rowCount1 As Integer  = ws1.UsedRange.Rows.Count&#xD;&#xA;Dim rowCount2 As Integer  = ws2.UsedRange.Rows.Count&#xD;&#xA;Dim rowCount3 As Integer  = ws3.UsedRange.Rows.Count&#xD;&#xA;Dim rowCount4 As Integer  = ws4.UsedRange.Rows.Count&#xD;&#xA;Dim rowCount5 As Integer  = ws5.UsedRange.Rows.Count&#xD;&#xA;Dim rowCount6 As Integer  = ws6.UsedRange.Rows.Count&#xD;&#xA;Dim rowCount7 As Integer  = ws7.UsedRange.Rows.Count&#xD;&#xA;Dim Style As Microsoft.Office.Interop.Excel.Style &#xD;&#xA;'sum for source sheet&#xD;&#xA;Dim countRow As Integer=2&#xD;&#xA;Try&#xD;&#xA;While ws.Range(&quot;Y&quot;+countRow.ToString).Value.ToString &lt;&gt;&quot;&quot;&#xD;&#xA; countRow=countRow+1&#xD;&#xA; 'Console.WriteLine(countRow.ToString)&#xD;&#xA;End While&#xD;&#xA;Catch es As Exception&#xD;&#xA;End Try&#xD;&#xA;countRow=countRow-1&#xD;&#xA;console.WriteLine(ws.Range(&quot;Y&quot;+countRow.ToString).Value.ToString)&#xD;&#xA;Dim SourceSum1 As Double =CType(ws.Range(&quot;Y&quot;+countRow.ToString).Value.ToString,Double)&#xD;&#xA;ws.Range(&quot;Y&quot;+(rowCount+1).ToString).Value = SourceSum1&#xD;&#xA;'ws.Range(&quot;Y&quot;+countRow.ToString).Value.ToString.CopyTo(ws.Range(&quot;Y&quot;+(rowCount+1).ToString))&#xD;&#xA;'ws.Range(&quot;Y&quot;+(rowCount+1).ToString).Formula=&quot;=Sum(Y2:Y&quot;+rowCount.ToString+&quot;)&quot;&#xD;&#xA;'ws.Range(&quot;Y&quot;+(rowCount+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;console.WriteLine(&quot;Sum for source&quot;)&#xD;&#xA;ws.Range(&quot;Y&quot;+(rowCount+1).ToString).style=&quot;Check Cell&quot; &#xD;&#xA;ws.Range(&quot;Y&quot;+(rowCount+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws.Range(&quot;Y&quot;+(rowCount+1).ToString).Font.ColorIndex=Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic&#xD;&#xA;'BorderInside(Microsoft.Office.Interop.Excel.LineStyleType.Thin, Color.black) = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous&#xD;&#xA;'ws.Range(&quot;Y&quot;+(rowCount+1).ToString).BorderInside(Microsoft.Office.Interop.Excel.LineStyleType.Medium, Color.black) = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous&#xD;&#xA;console.WriteLine(&quot;Sum for source end&quot;)&#xD;&#xA;ws.Range(&quot;Y1:Z1&quot;).EntireColumn.AutoFit()&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;'sum for AU&#xD;&#xA;ws1.Range(&quot;Y&quot;+(rowCount1+1).ToString).Formula=&quot;=Sum(Y2:Y&quot;+rowCount1.ToString+&quot;)&quot;&#xD;&#xA;ws1.Range(&quot;Y&quot;+(rowCount1+1).ToString).style=&quot;Check Cell&quot; &#xD;&#xA;ws1.Range(&quot;Y&quot;+(rowCount1+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws1.Range(&quot;Y&quot;+(rowCount1+1).ToString).Font.ColorIndex = Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic&#xD;&#xA;'sum for CA&#xD;&#xA;ws2.Range(&quot;Y&quot;+(rowCount2+1).ToString).Formula=&quot;=Sum(Y2:Y&quot;+rowCount2.ToString+&quot;)&quot;&#xD;&#xA;ws2.Range(&quot;Y&quot;+(rowCount2+1).ToString).style=&quot;Check Cell&quot; &#xD;&#xA;ws2.Range(&quot;Y&quot;+(rowCount2+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws2.Range(&quot;Y&quot;+(rowCount2+1).ToString).Font.ColorIndex = Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic&#xD;&#xA;'Sum for ES&#xD;&#xA;ws3.Range(&quot;Y&quot;+(rowCount3+1).ToString).Formula=&quot;=Sum(Y2:Y&quot;+rowCount3.ToString+&quot;)&quot;&#xD;&#xA;ws3.Range(&quot;Y&quot;+(rowCount3+1).ToString).style=&quot;Check Cell&quot; &#xD;&#xA;ws3.Range(&quot;Y&quot;+(rowCount3+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws3.Range(&quot;Y&quot;+(rowCount3+1).ToString).Font.ColorIndex = Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic&#xD;&#xA;'sum for IE&#xD;&#xA;ws4.Range(&quot;Y&quot;+(rowCount4+1).ToString).Formula=&quot;=Sum(Y2:Y&quot;+rowCount4.ToString+&quot;)&quot;&#xD;&#xA;ws4.Range(&quot;Y&quot;+(rowCount4+1).ToString).style=&quot;Check Cell&quot; &#xD;&#xA;ws4.Range(&quot;Y&quot;+(rowCount4+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws4.Range(&quot;Y&quot;+(rowCount4+1).ToString).Font.ColorIndex = Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic&#xD;&#xA;'sum for ZA&#xD;&#xA;ws5.Range(&quot;Y&quot;+(rowCount5+1).ToString).Formula=&quot;=Sum(Y2:Y&quot;+rowCount5.ToString+&quot;)&quot;&#xD;&#xA;ws5.Range(&quot;Y&quot;+(rowCount5+1).ToString).style=&quot;Check Cell&quot; &#xD;&#xA;ws5.Range(&quot;Y&quot;+(rowCount5+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws5.Range(&quot;Y&quot;+(rowCount5+1).ToString).Font.ColorIndex = Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic&#xD;&#xA;'Sum for EU&#xD;&#xA;ws6.Range(&quot;Y&quot;+(rowCount6+1).ToString).Formula=&quot;=Sum(Y2:Y&quot;+rowCount6.ToString+&quot;)&quot;&#xD;&#xA;ws6.Range(&quot;Y&quot;+(rowCount6+1).ToString).style=&quot;Check Cell&quot; &#xD;&#xA;ws6.Range(&quot;Y&quot;+(rowCount6+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws6.Range(&quot;Y&quot;+(rowCount6+1).ToString).Font.ColorIndex = Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic&#xD;&#xA;&#xD;&#xA;'Sum for NON EU&#xD;&#xA;Dim countRowforNonEu As Integer=2&#xD;&#xA;Try&#xD;&#xA;While ws7.Range(&quot;Y&quot;+countRowforNonEu.ToString).Value.ToString &lt;&gt;&quot;&quot;&#xD;&#xA; countRowforNonEu=countRowforNonEu+1&#xD;&#xA; 'Console.WriteLine(countRow.ToString)&#xD;&#xA;End While&#xD;&#xA;Catch es As Exception&#xD;&#xA;End Try&#xD;&#xA;countRowforNonEu=countRowforNonEu-2&#xD;&#xA;console.WriteLine(countRowforNonEu.ToString)&#xD;&#xA;console.WriteLine(ws7.Range(&quot;Y&quot;+countRowforNonEu.ToString).Value.ToString)&#xD;&#xA;'Dim SumNONEU As Double =CType(ws7.Range(&quot;Y&quot;+countRow.ToString).Value.ToString,Double)&#xD;&#xA;&#xD;&#xA;'ws.Range(&quot;Y&quot;+(rowCount+1).ToString).Value = SourceSum1&#xD;&#xA;ws7.Range(&quot;Y&quot;+(rowCount7+1).ToString).Formula=&quot;=Sum(Y2:Y&quot;+countRowforNonEu.ToString+&quot;)&quot;&#xD;&#xA;ws7.Range(&quot;Y&quot;+(rowCount7+1).ToString).style=&quot;Check Cell&quot; &#xD;&#xA;ws7.Range(&quot;Y&quot;+(rowCount7+1).ToString).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws7.Range(&quot;Y&quot;+(rowCount7+1).ToString).Font.ColorIndex = Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic&#xD;&#xA;Console.WriteLine(ws2.Range(&quot;Y&quot;+(rowCount+1).ToString).Value)&#xD;&#xA;&#xD;&#xA;' add sum sheet called CHECK&#xD;&#xA;ws9=CType(wb1.Sheets.Add(ws),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;ws9.Name=&quot;Check&quot;&#xD;&#xA;console.WriteLine(&quot;created check sheet&quot;)&#xD;&#xA;ws9.Activate&#xD;&#xA;&#xD;&#xA;' Copy all Source sum inro CHECK Sheet&#xD;&#xA;ws9.Range(&quot;D3&quot;).Value=SourceSum1&#xD;&#xA;&#xD;&#xA;'ws.Range(&quot;Y&quot;+(rowCount+1).ToString).Copy&#xD;&#xA;'ws9.Range(&quot;D3&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;&#xD;&#xA;ws9.Range(&quot;A3&quot;).Value = &quot;Source&quot;&#xD;&#xA;&#xD;&#xA;'Copy AU sum&#xD;&#xA;ws1.Range(&quot;Y&quot;+(rowCount1+1).ToString).Copy&#xD;&#xA;ws9.Range(&quot;B4&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws9.Range(&quot;A4&quot;).Value = &quot;AU&quot;&#xD;&#xA;'copy CA sum&#xD;&#xA;ws2.Range(&quot;Y&quot;+(rowCount2+1).ToString).Copy&#xD;&#xA;ws9.Range(&quot;B5&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws9.Range(&quot;A5&quot;).Value = &quot;CA&quot;&#xD;&#xA;'Copy ES Sum&#xD;&#xA;ws3.Range(&quot;Y&quot;+(rowCount3+1).ToString).Copy&#xD;&#xA;ws9.Range(&quot;B6&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws9.Range(&quot;A6&quot;).Value = &quot;ES&quot;&#xD;&#xA;'Copy IE sum&#xD;&#xA;ws4.Range(&quot;Y&quot;+(rowCount4+1).ToString).Copy&#xD;&#xA;ws9.Range(&quot;B7&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws9.Range(&quot;A7&quot;).Value = &quot;IE&quot;&#xD;&#xA;' Copy ZA sum&#xD;&#xA;ws5.Range(&quot;Y&quot;+(rowCount5+1).ToString).Copy&#xD;&#xA;ws9.Range(&quot;B8&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws9.Range(&quot;A8&quot;).Value = &quot;ZA&quot;&#xD;&#xA;&#xD;&#xA;'Copy EU sum&#xD;&#xA;ws6.Range(&quot;Y&quot;+(rowCount6+1).ToString).Copy&#xD;&#xA;ws9.Range(&quot;B9&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws9.Range(&quot;A9&quot;).Value = &quot;EU&quot;&#xD;&#xA;&#xD;&#xA;'Copy NON Eu sum&#xD;&#xA;ws7.Range(&quot;Y&quot;+(rowCount7+1).ToString).Copy&#xD;&#xA;ws9.Range(&quot;B10&quot;).PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues)&#xD;&#xA;ws9.Range(&quot;A10&quot;).Value = &quot;NON-EU&quot;&#xD;&#xA;&#xD;&#xA;ws9.Range(&quot;A2&quot;).Value =&quot;Check&quot;&#xD;&#xA;ws9.Range(&quot;A2:D2&quot;).Interior.Color = RGB(255,255,14)&#xD;&#xA;ws9.Range(&quot;D11&quot;).Formula=&quot;=Sum(B4:B10)&quot;&#xD;&#xA;ws9.Range(&quot;B1:D1&quot;).EntireColumn.AutoFit()&#xD;&#xA;&#xD;&#xA;Dim wholesum As Double = CType(ws9.Range(&quot;D11&quot;).Value, Double)&#xD;&#xA;console.WriteLine(&quot;wholesum&quot;+wholesum.ToString)&#xD;&#xA;&#xD;&#xA;Dim Sourcesum As Double =CType(ws9.Range(&quot;D3&quot;).Value, Double)&#xD;&#xA;&#xD;&#xA;console.WriteLine(&quot;Sourcesum&quot;+Sourcesum.ToString)&#xD;&#xA;&#xD;&#xA;wb2.SaveAs(in_WorkbookPath)&#xD;&#xA;If Sourcesum.ToString.Equals(wholesum.ToString) Then&#xD;&#xA;  console.WriteLine(&quot;sum are equal&quot;)&#xD;&#xA;  in_SourceSum = True&#xD;&#xA;  Else&#xD;&#xA;   console.WriteLine(&quot;send email&quot;+&quot; &quot;+Sourcesum.ToString+&quot; &quot;+wholesum.ToString)&#xD;&#xA;   in_SourceSum = False&#xD;&#xA;End If&#xD;&#xA;Catch es As Exception&#xD;&#xA;Console.WriteLine(es.Message)&#xD;&#xA;Console.WriteLine(es.Source)&#xD;&#xA;Throw es&#xD;&#xA;Finally&#xD;&#xA; &#xD;&#xA;wb1.Save()&#xD;&#xA; wb1.Close()&#xD;&#xA;wb2.Save()&#xD;&#xA; wb2.Close()&#xD;&#xA;End Try&#xD;&#xA;&#xD;&#xA;" DisplayName="Invoke Code : IC#01" sap:VirtualizedContainerService.HintSize="794.4,208.8" sap2010:WorkflowViewState.IdRef="InvokeCode_7">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="moie:ApplicationClass" x:Key="excel" />
+          <InArgument x:TypeArguments="x:String" x:Key="in_Filepath">[var_filePath]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_WorkbookPath">[var_workbookPath]</InArgument>
+          <OutArgument x:TypeArguments="x:Boolean" x:Key="in_SourceSum">[var_sourceSum]</OutArgument>
+        </ui:InvokeCode.Arguments>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:InvokeCode>
+      <ui:LogMessage DisplayName="Log Message : Creation of Sheets end #33" sap:VirtualizedContainerService.HintSize="794.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_31" Level="Info" Message="Creation of Sheets end" />
+      <ui:LogMessage DisplayName="Log Message :var_sourceSum" sap:VirtualizedContainerService.HintSize="794.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_32" Level="Info" Message="[var_sourceSum.ToString]" />
+      <ui:LogMessage DisplayName="Log Message : Comparision of sum start" sap:VirtualizedContainerService.HintSize="794.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_33" Level="Info" Message="Comparision of sum start" />
+      <If Condition="[var_sourceSum.Equals(True)]" DisplayName="If to compare source sum and all sheets sum" sap:VirtualizedContainerService.HintSize="794.4,621.6" sap2010:WorkflowViewState.IdRef="If_24">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <If.Then>
+          <Sequence DisplayName="If sum is same" sap:VirtualizedContainerService.HintSize="375.2,185.6" sap2010:WorkflowViewState.IdRef="Sequence_31">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message : &quot;Sum of all sheets is same as Source SUM&quot; #34" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_34" Level="Info" Message="Sum of all sheets is same as Source SUM" />
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="If sum is different" sap:VirtualizedContainerService.HintSize="375.2,472" sap2010:WorkflowViewState.IdRef="Sequence_29">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message : &quot;Sum of all sheets is  Different  SUM&quot; #35" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_35" Level="Info" Message="Sum of all sheets is differnt from Source SUM" />
+            <Assign DisplayName="Assign : MailBody Assignment : Different Sum " sap:VirtualizedContainerService.HintSize="333.6,60" sap2010:WorkflowViewState.IdRef="Assign_42">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[var_emailBody]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;html&gt;&lt;body &gt;&lt;/body  lang=\EN-US\ &gt;&lt;div&gt;&lt;p&gt;Hi Team,&lt;/p&gt;&lt;p&gt;There is mismatch of sum between the source data sheet and all other data sheets.&lt;/p&gt;&lt;p&gt;Thanks &amp; Regards&lt;br&gt;BOT CoE Team.&lt;/p&gt;&lt;p&gt;&lt;b&gt;&amp;nbsp;&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:SendMail Bcc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[var_emailBody]" Cc="[in_BAS]" DisplayName="Send SMTP Mail Message to user when sum is different" Email="[in_UserName]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="333.6,146.4" sap2010:WorkflowViewState.IdRef="SendMail_10" IsBodyHtml="True" Password="[in_Password]" Port="[in_SmtpPort]" SecureConnection="Auto" Server="[in_SmtpHost]" Subject="[in_Config(&quot;SubjectNotification&quot;).ToString+&quot;||&quot;+ in_Config(&quot;BusinessProcessName&quot;).ToString]" To="[in_GroupEmail+&quot;;&quot;+in_UserEmail]">
+              <ui:SendMail.Files>
+                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+              </ui:SendMail.Files>
+            </ui:SendMail>
+          </Sequence>
+        </If.Else>
+      </If>
+      <ui:LogMessage DisplayName="Log Message : Comparision of sum end #37" sap:VirtualizedContainerService.HintSize="794.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_36" Level="Info" Message="Comparision of sum end" />
+      <ui:LogMessage DisplayName="Log Message : &quot;Invoke code for pivot table start&quot; #38" sap:VirtualizedContainerService.HintSize="794.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_37" Level="Info" Message="Invoke code for pivot table start" />
+      <ui:InvokeCode ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Create pivot for EU country." Code="Dim wb1 As Microsoft.Office.Interop.Excel.Workbook&#xD;&#xA;Dim wb2 As Microsoft.Office.Interop.Excel.Workbook&#xD;&#xA;Dim ws As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws1 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws2 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws3 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim ws4 As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim p_ws As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim rng As Microsoft.Office.Interop.Excel.Range &#xD;&#xA;Dim p_rng As Microsoft.Office.Interop.Excel.Range&#xD;&#xA;Dim lastRow As Integer&#xD;&#xA;Try&#xD;&#xA; excel = New Microsoft.Office.Interop.Excel.ApplicationClass'create the instance of excel work book'&#xD;&#xA;wb1=excel.Workbooks.Open(in_WorkbookPath+&quot;.XLSX&quot;)&#xD;&#xA;&#xD;&#xA;excel.Visible=True&#xD;&#xA;excel.DisplayAlerts=False&#xD;&#xA;ws=CType(wb1.Sheets(&quot;Sheet1&quot;),Microsoft.Office.Interop.Excel.Worksheet)'select a sheet and activiates'&#xD;&#xA;ws.Activate&#xD;&#xA;lastRow = ws.UsedRange.Rows.Count&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(25,{&quot;0&quot;},Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlFilterValues)&#xD;&#xA;&#xD;&#xA;ws.Range(&quot;A2:AJ2&quot;+lastRow.ToString).ClearContents&#xD;&#xA;ws.Range(&quot;A1&quot;).AutoFilter(25)&#xD;&#xA;ws.UsedRange.SpecialCells(Type:=Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeBlanks).Rows.Delete(Shift:=Microsoft.Office.Interop.Excel.XlDirection.xlUp)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Dim cn As Microsoft.Office.Interop.Excel.WorkbookConnection&#xD;&#xA;For Each cn In wb1.Connections&#xD;&#xA;If cn.Name &lt;&gt; &quot;ThisWorkbookDataModel&quot; Then&#xD;&#xA;  cn.delete&#xD;&#xA;End If&#xD;&#xA;Next &#xD;&#xA;  &#xD;&#xA;  With wb1&#xD;&#xA;&#xD;&#xA; cn=  .Connections.Add2(Name :=&quot;SpendDataModel&quot;,Description:=&quot;DataModel&quot;,ConnectionString:=&quot;WORKSHEET;&quot;+wb1.FullName,CommandText:=ws.Name+&quot;!&quot;+ws.Range(&quot;A1&quot;).CurrentRegion.address,lCmdtype:=Microsoft.Office.Interop.Excel.XlCmdType.xlCmdExcel,CreateModelConnection:=True)&#xD;&#xA;&#xD;&#xA;End With &#xD;&#xA;p_ws=CType(wb1.Sheets.Add,Microsoft.Office.Interop.Excel.Worksheet)'select a sheet and activiates'&#xD;&#xA;p_ws.Name=&quot;Sheet2&quot;&#xD;&#xA;p_ws.Activate&#xD;&#xA;&#xD;&#xA;p_rng= CType(p_ws.Range(&quot;A2&quot;),Microsoft.Office.Interop.Excel.Range) 'Specify the first cell for the pivot table'&#xD;&#xA;&#xD;&#xA;&#xD;&#xA; 'Creation pivot Cache and pivot table '&#xD;&#xA;Dim oPivotCache As Microsoft.Office.Interop.Excel.PivotCache=Nothing&#xD;&#xA;Dim oPivotTables As Microsoft.Office.Interop.Excel.PivotTables=Nothing&#xD;&#xA;Dim oPivotTable As Microsoft.Office.Interop.Excel.PivotTable=Nothing&#xD;&#xA;&#xD;&#xA;oPivotCache =CType(wb1.PivotCaches.Create(SourceType:=Microsoft.Office.Interop.Excel.XlPivotTableSourceType.xlExternal,SourceData:=cn,Version:=Microsoft.Office.Interop.Excel.XlPivotTableVersionList.xlPivotTableVersion15),Microsoft.Office.Interop.Excel.PivotCache)&#xD;&#xA;&#xD;&#xA;oPivotTables=DirectCast(p_ws.PivotTables(Type.Missing),Microsoft.Office.Interop.Excel.PivotTables)&#xD;&#xA;&#xD;&#xA;oPivotTable=oPivotTables.Add(oPivotCache,p_rng,&quot;PivotTable1&quot;,Type.Missing,Type.Missing)'first paramenter is cache,range the table should start,table name'&#xD;&#xA;oPivotTable.SmallGrid=False&#xD;&#xA;oPivotTable.ShowTableStyleRowStripes=True&#xD;&#xA;oPivotTable.TableStyle2=&quot;PivotStyleMedium2&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Dim CubeField1 As Microsoft.Office.Interop.Excel.CubeField &#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Dim index As Integer = 1&#xD;&#xA;While index &lt;= CInt(oPivotTable.CubeFields.Count)&#xD;&#xA; If oPivotTable.CubeFields(index).Name.ToString.Equals(&quot;[Range].[Partner/Vendor Name]&quot;) Then &#xD;&#xA;&#xD;&#xA;  CubeField1= oPivotTable.CubeFields(index)&#xD;&#xA;   CubeField1.Orientation=Microsoft.Office.Interop.Excel.XlPivotFieldOrientation.xlRowField&#xD;&#xA;Else &#xD;&#xA; End If &#xD;&#xA;If oPivotTable.CubeFields(index).Name.ToString.Equals(&quot;[Range].[Document Number]&quot;) Then &#xD;&#xA;&#xD;&#xA;  CubeField1= oPivotTable.CubeFields(index)&#xD;&#xA;   CubeField1.Orientation=Microsoft.Office.Interop.Excel.XlPivotFieldOrientation.xlRowField&#xD;&#xA;Else &#xD;&#xA; End If &#xD;&#xA; If oPivotTable.CubeFields(index).Name.ToString.Equals(&quot;[Range].[Vendor Reference Number]&quot;) Then &#xD;&#xA;&#xD;&#xA;  CubeField1= oPivotTable.CubeFields(index)&#xD;&#xA;   CubeField1.Orientation=Microsoft.Office.Interop.Excel.XlPivotFieldOrientation.xlRowField&#xD;&#xA;Else &#xD;&#xA; End If &#xD;&#xA;  If oPivotTable.CubeFields(index).Name.ToString.Equals(&quot;[Range].[Vendor VAT Registration Country]&quot;) Then &#xD;&#xA;&#xD;&#xA;  CubeField1= oPivotTable.CubeFields(index)&#xD;&#xA;   CubeField1.Orientation=Microsoft.Office.Interop.Excel.XlPivotFieldOrientation.xlRowField&#xD;&#xA;&#xD;&#xA;Else &#xD;&#xA; End If &#xD;&#xA;&#xD;&#xA;  If oPivotTable.CubeFields(index).Name.ToString.Equals(&quot;[Range].[Deductible LC tax]&quot;) Then &#xD;&#xA;  CubeField1= oPivotTable.CubeFields(index)&#xD;&#xA;  CubeField1=oPivotTable.CubeFields.GetMeasure(oPivotTable.CubeFields(index).Name, Microsoft.Office.Interop.Excel.XlConsolidationFunction.xlSum)&#xD;&#xA;  oPivotTable.AddDataField(CubeField1)&#xD;&#xA;   &#xD;&#xA;Else &#xD;&#xA; End If &#xD;&#xA;  index += 1&#xD;&#xA;End While&#xD;&#xA;Dim PivotTable As Microsoft.Office.Interop.Excel.PivotTable=  CType(p_ws.PivotTables(&quot;PivotTable1&quot;),Microsoft.Office.Interop.Excel.PivotTable)&#xD;&#xA;PivotTable.RowAxisLayout(Microsoft.Office.Interop.Excel.XlLayoutRowType.xlTabularRow) &#xD;&#xA;Dim CPTF As Microsoft.Office.Interop.Excel.PivotField&#xD;&#xA;Dim PTFs As Microsoft.Office.Interop.Excel.PivotFields&#xD;&#xA;PTFs = CType(PivotTable.PivotFields,Microsoft.Office.Interop.Excel.PivotFields)&#xD;&#xA;CPTF=CType(PTFs.Item(&quot;[Range].[Partner/Vendor Name].[Partner/Vendor Name]&quot;),Microsoft.Office.Interop.Excel.PivotField)&#xD;&#xA;&#xD;&#xA;CPTF.PivotFilters.Add2(Type:=Microsoft.Office.Interop.Excel.XlPivotFilterType.xlValueDoesNotEqual,DataField:=CType(PTFs.Item(&quot;[Measures].[Sum of Deductible LC tax]&quot;),Microsoft.Office.Interop.Excel.PivotField),Value1:=0)&#xD;&#xA;Catch es As Exception&#xD;&#xA;Console.WriteLine(es.Message)&#xD;&#xA;Console.WriteLine(es.Source)&#xD;&#xA;Throw es&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Finally&#xD;&#xA; &#xD;&#xA;wb1.Save()&#xD;&#xA;wb1.Close()&#xD;&#xA;End Try&#xD;&#xA;&#xD;&#xA;" DisplayName="Invoke Code to create pivot table for EU" sap:VirtualizedContainerService.HintSize="794.4,192.8" sap2010:WorkflowViewState.IdRef="InvokeCode_8">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="moie:ApplicationClass" x:Key="excel" />
+          <InArgument x:TypeArguments="x:String" x:Key="in_WorkbookPath">[var_workbookPath]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[var_filePath]</InArgument>
+        </ui:InvokeCode.Arguments>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:InvokeCode>
+      <ui:LogMessage DisplayName="Log Message : Invoke code for pivot table end #39" sap:VirtualizedContainerService.HintSize="794.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_38" Level="Info" Message="Invoke code for pivot table end" />
+      <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process : Kills Excel : " sap:VirtualizedContainerService.HintSize="794.4,22.4" sap2010:WorkflowViewState.IdRef="KillProcess_4" ProcessName="[in_Config(&quot;AppNameExcel&quot;).ToString]" />
+    </Sequence>
+  </Sequence>
+</Activity>
